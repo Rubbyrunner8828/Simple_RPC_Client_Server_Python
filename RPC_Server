@@ -1,0 +1,26 @@
+from xmlrpc.server import SimpleXMLRPCServer
+import datetime
+import xmlrpc.client
+
+def Salam():
+    return 'Selamat Pagi, Anda terhubung dengan server'
+
+def Tambah(x,y):
+    return x+y
+
+def kurang(x,y):
+    return x-y
+def inihari():
+    inihari = datetime.datetime.today()
+    return xmlrpc.client.DateTime(inihari)
+
+marshalling = SimpleXMLRPCServer(("localhost",8000))
+
+marshalling.register_function(Salam)
+marshalling.register_function(Tambah, 'Tambah')
+marshalling.register_function(kurang, 'kurang')
+marshalling.register_function(inihari,'inihari')
+
+print("Server sedang berkomunikasi menggunakan port 8000")
+
+marshalling.serve_forever()
