@@ -1,0 +1,17 @@
+import xmlrpc.client
+import datetime
+
+proxy = xmlrpc.client.ServerProxy("http://localhost:8000/")
+
+unmarshaliing = proxy.Salam()
+print(unmarshaliing)
+
+nambah = proxy.Tambah(2,3)
+print("Hasilnya adalah ", nambah)
+
+urang = proxy.kurang(4,5)
+print("Hasil dari 4 - 5 = ", urang)
+
+hariini = proxy.inihari()
+ubah = datetime.datetime.strptime(hariini.value, "%Y%m%dT%H:%M:%S")
+print("Hari in: %s" % ubah.strftime("%d.%m.%y, %H:%M"))
